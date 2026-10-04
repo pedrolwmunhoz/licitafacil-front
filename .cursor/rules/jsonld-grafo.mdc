@@ -1,0 +1,48 @@
+---
+description: Grafo JSON-LD SegPonto — conceitos estáveis, about/mentions, related articles
+globs: src/content/jsonld/**/*.ts,src/components/seo/jsonld/**/*.ts,src/components/seo/entities.ts
+alwaysApply: false
+---
+
+# JSON-LD — grafo por página
+
+1 URL = 1 arquivo em `src/content/jsonld/`. Templates em `src/components/seo/jsonld/templates.ts`. Conceitos em `src/components/seo/entities.ts` (`CONCEPT_IDS` + `CONCEPT_DEFS`).
+
+Sem script, sem gerador, sem barrel. Edita **um arquivo por URL**.
+
+## Conceitos estáveis
+
+- Mesmo `@id` (`https://segponto.com.br/#hora-extra`, etc.) em todas as páginas que falam do tema.
+- Não criar Thing novo por URL. Não transformar cada H2 em Thing.
+- Novo tema recorrente → acrescentar em `CONCEPT_IDS` + `CONCEPT_DEFS` (name, description, `canonicalPath` da página canônica).
+
+## Campos por página
+
+| Campo | Uso |
+| --- | --- |
+| `aboutIds` | 2–3 assuntos **centrais** da URL (obrigatório em landings/calcs/posts temáticos) |
+| `mentionIds` | Conceitos secundários que **já têm** página/conceito no grafo |
+| `relatedArticlePaths` | Só posts (`/blog/...`): refs `@id` `#article` de outros posts; **não** embutir o artigo |
+
+Home, hubs (`/blog`, `/calculadoras`) e páginas institucionais usam templates próprios — sem forçar `aboutIds`.
+
+## Templates
+
+- Landing → `landingJsonLd` (`aboutIds` + `mentionIds` + breadcrumb + FAQ)
+- Post → `articleJsonLd` (+ `relatedArticlePaths` quando houver 1–3 posts vizinhos)
+- Calculadora → `calculatorJsonLd` (+ `relatedArticlePaths` para o guia do blog)
+
+## Checklist ao tocar um arquivo
+
+1. Path exportado = URL canônica
+2. `aboutIds` batem com o tema real da página (não “enchimento”)
+3. `mentionIds` só conceitos existentes em `CONCEPT_IDS`
+4. `relatedArticlePaths` só paths de posts que existem
+5. FAQ só se a página realmente tem FAQ renderizado
+
+## Proibido
+
+- `conceptId` único (legado) — use `aboutIds`
+- Gerar JSON-LD em lote / script / “atualizar todos”
+- Importar conteúdo de outra rota só para montar o grafo
+- Duplicar Organization/WebSite com `@id` diferente do canônico

@@ -1,0 +1,20 @@
+import { pontoEletronicoParaRestaurantesContent as content } from "@/content/seo-landings/ponto-eletronico-para-restaurantes";
+import { landingJsonLd } from "@/components/seo/jsonld/templates";
+
+const crumbTitle = content.seo.title.split(" | ")[0] ?? content.seo.title;
+
+/** JSON-LD exclusivo de /ponto-eletronico-para-restaurantes */
+export const path = content.seo.path;
+export const jsonLd = landingJsonLd({
+  path: content.seo.path,
+  title: content.seo.title,
+  description: content.seo.description,
+  faqs: content.faqs?.items,
+  aboutIds: ["pontoEletronico", "controleDeJornada"],
+  mentionIds: ["horaExtra", "domingoTrabalhado"],
+  breadcrumb: [
+    { name: "Home", path: "/" },
+    { name: "Segmentos", path: "/segmentos" },
+    { name: crumbTitle, path: content.seo.path },
+  ],
+});
