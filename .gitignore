@@ -1,33 +1,5 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
 node_modules
-.lovable/
 dist
-dist-ssr
-*.local
-
-# MPA gerado por scripts/generate-mpa-entries.mjs (npm run gen:mpa / build / dev)
-/mpa-html/
-/src/entries/public/
-/src/styles/routes/
-/tailwind.routes/
-/src/mpa/public-routes.generated.ts
-/src/mpa/route-id-manifest.json
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+.env
+.env.*

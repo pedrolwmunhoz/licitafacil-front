@@ -1,10 +1,9 @@
-# licitafacil-landing
+# LicitaFacil — Landing
 
-Landing page do LicitaFacil (estrutura copiada do `ponto-eletronico-frontend`).
-
-Mockup de referência: `mockups/Radar PNCP — Mockups MVP (2).html`
+Site institucional (sem login). Contato para pedir acesso.
 
 ```bash
 npm install
 npm run dev
+npm run build
 ```
